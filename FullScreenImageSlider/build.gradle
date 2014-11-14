@@ -126,6 +126,7 @@ task('replaceApplName') << {
     String TargetFile4 = "FullScreenImageSlider/res/values/strings.xml"
     String contents4 = new File(TargetFile4).getText('UTF-8')
     contents4 = contents4.replaceAll("APPL_NAME", System.getenv("APPL_NAME"))
+    contents4 = contents4.replaceAll("APPL_PUBLISHER", System.getenv("APPL_PUBLISHER"))
     new File(TargetFile4).write(contents4, 'UTF-8') 
 }
 
