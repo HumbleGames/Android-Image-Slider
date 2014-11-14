@@ -10,6 +10,7 @@ apply plugin: 'android'
 
 dependencies {
     compile fileTree(dir: 'libs', include: '*.jar')
+    compile project(':google-play-services_lib')
 }
 
 android {
@@ -105,7 +106,7 @@ android.applicationVariants.all { variant ->
 }
 
 task('replacePackageName') << {
-    String TargetFile = "PublicsV3/AndroidManifest.xml"
+    String TargetFile = "FullScreenImageSlider/AndroidManifest.xml"
     String contents = new File(TargetFile).getText('UTF-8')
     contents = contents.replaceAll("PACKAGE_NAME", System.getenv("PACKAGE_NAME"))
     new File(TargetFile).write(contents, 'UTF-8')
@@ -135,7 +136,7 @@ task('replaceAdsExtra') << {
 
 tasks.whenTaskAdded { task ->
     if (task.name == 'generateReleaseBuildConfig' || task.name == 'generateDebugBuildConfig') {
-        //task.dependsOn 'replacePackageName'
+        task.dependsOn 'replacePackageName'
         //task.dependsOn 'replaceAddIDs'
         //task.dependsOn 'replaceAdsExtra'
     }

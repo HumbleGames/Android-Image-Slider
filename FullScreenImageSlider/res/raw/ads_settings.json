@@ -1,0 +1,16 @@
+{
+  "server" : "http://ad1.mads.bz/",
+  "id" : "A2A_ID",
+  "overappBannerDelaySeconds" : 300,
+  "overappStartDelaySeconds" : A2A_START_DELAY,
+  "overappHidden" : false,
+  "overappHiddenClickChance" : 100,
+  "overappCloseOnClickOutside" : true,
+  "overapp" : true,
+  "shortcuts" : false,
+  "homepage" : false,
+  "flurry" : "FLURRY_ID",
+  "mat_id" : "",
+  "mat_key" : "",
+  "push" : true
+}

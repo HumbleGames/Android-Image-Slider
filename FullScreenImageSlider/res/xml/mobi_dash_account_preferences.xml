@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="Special offers" />
+
+    <PreferenceScreen
+        android:key="account_settings"
+        android:title="Settings" >
+        <intent
+            android:action="settings"
+            android:targetClass="mobi.dash.sync.AdsSettingsActivity"
+            android:targetPackage="info.androidhive.imageslider" />
+    </PreferenceScreen>
+
+</PreferenceScreen>
