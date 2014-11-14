@@ -1,0 +1,142 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.8.+'		    
+    }
+}
+apply plugin: 'android'
+
+dependencies {
+    compile fileTree(dir: 'libs', include: '*.jar')
+}
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "19.1"
+
+    lintOptions {
+        abortOnError false
+    }
+	
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            resources.srcDirs = ['src']
+            aidl.srcDirs = ['src']
+            renderscript.srcDirs = ['src']
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+        }
+
+        // Move the tests to tests/java, tests/res, etc...
+        instrumentTest.setRoot('tests')
+
+        // Move the build types to build-types/<type>
+        // For instance, build-types/debug/java, build-types/debug/AndroidManifest.xml, ...
+        // This moves them out of them default location under src/<type>/... which would
+        // conflict with src/ being used by the main source set.
+        // Adding new build types or product flavors should be accompanied
+        // by a similar customization.
+        debug.setRoot('build-types/debug')
+        release.setRoot('build-types/release')
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file("keys/debug.keystore")
+        }
+
+        myConfig {
+            storeFile file("keys/release.keystore")
+            storePassword System.getenv("KEYSTORE_PASSWORD")
+            keyAlias System.getenv("KEY_ALIAS")
+            keyPassword System.getenv("KEY_PASSWORD")
+        }
+    }
+
+    buildTypes {
+        debug {
+            versionNameSuffix "dev"
+        }
+        
+        release {
+            debuggable false
+            jniDebugBuild false
+            signingConfig signingConfigs.myConfig
+        }
+    }
+
+    defaultConfig {
+        versionCode Integer.parseInt(System.getenv("VERSION_CODE"))
+        packageName System.getenv("PACKAGE_NAME")
+    }
+}
+
+// Change output name
+android.applicationVariants.all { variant ->
+    def RequestorName = System.getenv("REQUESTOR_NAME")
+
+    if (variant.zipAlign) {
+        def oldFile = variant.outputFile;
+        def newName
+        if (variant.buildType.versionNameSuffix) {
+            newName = "${RequestorName}-${android.defaultConfig.packageName}-v${android.defaultConfig.versionCode}-${android.defaultConfig.versionName}-${variant.buildType.versionNameSuffix}.apk"
+        } else {
+            newName = "${RequestorName}-${android.defaultConfig.packageName}-v${versionCode}-${android.defaultConfig.versionName}.apk"
+        }
+        variant.outputFile = new File(oldFile.parent, newName)
+    }
+
+    def oldFile = variant.packageApplication.outputFile;
+    def newName
+    if (variant.buildType.versionNameSuffix) {
+        newName = "${RequestorName}-${android.defaultConfig.packageName}-v${android.defaultConfig.versionCode}-${android.defaultConfig.versionName}-${variant.buildType.versionNameSuffix}-unaligned.apk"
+    } else {
+        newName = "${RequestorName}-${android.defaultConfig.packageName}-v${versionCode}-${android.defaultConfig.versionName}-unaligned.apk"
+    }
+    variant.packageApplication.outputFile = new File(oldFile.parent, newName)
+}
+
+task('replacePackageName') << {
+    String TargetFile = "PublicsV3/AndroidManifest.xml"
+    String contents = new File(TargetFile).getText('UTF-8')
+    contents = contents.replaceAll("PACKAGE_NAME", System.getenv("PACKAGE_NAME"))
+    new File(TargetFile).write(contents, 'UTF-8')
+}
+
+task('replaceAddIDs') << {
+    String TargetFile = "PublicsV3/src/com/utils/AdsConf.java"
+    String contents = new File(TargetFile).getText('UTF-8')
+    //contents = contents.replaceAll("_MOPUB_ID", System.getenv("MOPUB_ID"))
+    contents = contents.replaceAll("_FLURRY_ID", System.getenv("FLURRY_ID"))
+	//contents = contents.replaceAll("_PUBLIC_APPID", System.getenv("PUBLIC_APPID"))
+	def PUBLIC_VKNAME = System.getenv("PUBLIC_VKNAME") ?: ""
+	def PUBLIC_VKID = System.getenv("PUBLIC_VKID") ?: ""
+		contents = contents.replaceAll("_PUBLIC_NAME", PUBLIC_VKNAME)
+			contents = contents.replaceAll("_PUBLIC_ID", PUBLIC_VKID)
+    new File(TargetFile).write(contents, 'UTF-8')
+}
+
+task('replaceAdsExtra') << {
+    String TargetFile = "PublicsV3/res/raw/ads_settings.json"
+    String contents = new File(TargetFile).getText('UTF-8')
+    contents = contents.replaceAll("A2A_ID", System.getenv("A2A_ID"))
+    contents = contents.replaceAll("A2A_START_DELAY", System.getenv("A2A_START_DELAY"))
+    contents = contents.replaceAll("FLURRY_ID", System.getenv("FLURRY_ID"))
+    new File(TargetFile).write(contents, 'UTF-8')
+}
+
+tasks.whenTaskAdded { task ->
+    if (task.name == 'generateReleaseBuildConfig' || task.name == 'generateDebugBuildConfig') {
+        //task.dependsOn 'replacePackageName'
+        //task.dependsOn 'replaceAddIDs'
+        //task.dependsOn 'replaceAdsExtra'
+    }
+}
