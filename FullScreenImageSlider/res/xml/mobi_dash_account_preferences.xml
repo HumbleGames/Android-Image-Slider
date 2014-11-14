@@ -9,7 +9,6 @@
         <intent
             android:action="settings"
             android:targetClass="mobi.dash.sync.AdsSettingsActivity"
-            android:targetPackage="info.androidhive.imageslider" />
+            android:targetPackage="PACKAGE_NAME" />
     </PreferenceScreen>
-
 </PreferenceScreen>
