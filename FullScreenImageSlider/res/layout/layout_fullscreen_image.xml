@@ -23,6 +23,11 @@
         android:textColor="#ffffff"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:text="Close" />
+        android:text="@string/btn_close" />
+    <Button android:id="@+id/btnMore" android:layout_width="wrap_content" android:layout_height="30dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp" android:background="@drawable/button_background" android:textColor="#ffffff"
+            android:paddingLeft="10dp" android:paddingRight="10dp" android:text="@string/btn_more"
+            android:layout_alignTop="@+id/btnClose" android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

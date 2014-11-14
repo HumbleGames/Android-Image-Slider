@@ -1,6 +1,10 @@
 package info.androidhive.imageslider;
 
+import android.content.Intent;
 import android.content.res.AssetManager;
+import android.net.Uri;
+import android.view.View;
+import android.widget.Button;
 import info.androidhive.imageslider.adapter.GridViewImageAdapter;
 import info.androidhive.imageslider.helper.AppConstant;
 import info.androidhive.imageslider.helper.Utils;
@@ -29,6 +33,23 @@ public class GridViewActivity extends Activity {
 		setContentView(R.layout.activity_grid_view);
 
 		gridView = (GridView) findViewById(R.id.grid_view);
+
+		//---- More button action
+		Button btnMore = (Button) findViewById(R.id.btnMoreMain);
+
+		// More button click event (opens Google Play account)
+		btnMore.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				String publisherName = getString(R.string.app_publisher);
+				try {
+					startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pub:" + publisherName)));
+				} catch (android.content.ActivityNotFoundException anfe) {
+					startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://market.android.com/search?q=pub:" + publisherName)));
+				}
+			}
+		});
+		//---- END
 
 		utils = new Utils(this);
 

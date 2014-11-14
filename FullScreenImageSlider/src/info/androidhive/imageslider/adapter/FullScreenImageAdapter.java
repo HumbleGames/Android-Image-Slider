@@ -1,6 +1,7 @@
 package info.androidhive.imageslider.adapter;
 
 import android.content.res.AssetManager;
+import android.net.Uri;
 import info.androidhive.imageslider.R;
 import info.androidhive.imageslider.helper.TouchImageView;
 
@@ -22,6 +23,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+
+import android.content.Intent;
 
 public class FullScreenImageAdapter extends PagerAdapter {
 
@@ -70,6 +73,7 @@ public class FullScreenImageAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         TouchImageView imgDisplay;
         Button btnClose;
+        Button btnMore;
  
         inflater = (LayoutInflater) _activity
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -78,6 +82,7 @@ public class FullScreenImageAdapter extends PagerAdapter {
  
         imgDisplay = (TouchImageView) viewLayout.findViewById(R.id.imgDisplay);
         btnClose = (Button) viewLayout.findViewById(R.id.btnClose);
+        btnMore = (Button) viewLayout.findViewById(R.id.btnMore);
         
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.ARGB_8888;
@@ -97,7 +102,20 @@ public class FullScreenImageAdapter extends PagerAdapter {
 			public void onClick(View v) {
 				_activity.finish();
 			}
-		}); 
+		});
+
+        // More button click event (opens Google Play account)
+        btnMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String publisherName = _activity.getString(R.string.app_publisher);
+                try {
+                    _activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pub:" + publisherName)));
+                } catch (android.content.ActivityNotFoundException anfe) {
+                    _activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://market.android.com/search?q=pub:" + publisherName)));
+                }
+            }
+        });
 
         ((ViewPager) container).addView(viewLayout);
  
