@@ -120,6 +120,7 @@ public class GridViewImageAdapter extends BaseAdapter {
 		BitmapFactory.Options o2 = new BitmapFactory.Options();
 		o2.inSampleSize = scale;
 
+		// It's necessary when we're reading two times from assets
 		istr.reset();
 
 		return BitmapFactory.decodeStream(istr, null, o2);
