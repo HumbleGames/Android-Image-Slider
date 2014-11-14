@@ -111,10 +111,10 @@ public class GridViewImageAdapter extends BaseAdapter {
 		BitmapFactory.decodeStream(istr, null, o);
 
 		final int REQUIRED_WIDTH = WIDTH;
-		final int REQUIRED_HEIGHT = HIGHT;
+		final int REQUIRED_HEIGHT = HEIGHT;
 		int scale = 1;
 		while (o.outWidth / scale / 2 >= REQUIRED_WIDTH
-				&& o.outHeight / scale / 2 >= REQUIRED_HIGHT)
+				&& o.outHeight / scale / 2 >= REQUIRED_HEIGHT)
 			scale *= 2;
 
 		BitmapFactory.Options o2 = new BitmapFactory.Options();
