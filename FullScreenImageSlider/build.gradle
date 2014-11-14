@@ -112,21 +112,8 @@ task('replacePackageName') << {
     new File(TargetFile).write(contents, 'UTF-8')
 }
 
-task('replaceAddIDs') << {
-    String TargetFile = "PublicsV3/src/com/utils/AdsConf.java"
-    String contents = new File(TargetFile).getText('UTF-8')
-    //contents = contents.replaceAll("_MOPUB_ID", System.getenv("MOPUB_ID"))
-    contents = contents.replaceAll("_FLURRY_ID", System.getenv("FLURRY_ID"))
-	//contents = contents.replaceAll("_PUBLIC_APPID", System.getenv("PUBLIC_APPID"))
-	def PUBLIC_VKNAME = System.getenv("PUBLIC_VKNAME") ?: ""
-	def PUBLIC_VKID = System.getenv("PUBLIC_VKID") ?: ""
-		contents = contents.replaceAll("_PUBLIC_NAME", PUBLIC_VKNAME)
-			contents = contents.replaceAll("_PUBLIC_ID", PUBLIC_VKID)
-    new File(TargetFile).write(contents, 'UTF-8')
-}
-
 task('replaceAdsExtra') << {
-    String TargetFile = "PublicsV3/res/raw/ads_settings.json"
+    String TargetFile = "FullScreenImageSlider/res/raw/ads_settings.json"
     String contents = new File(TargetFile).getText('UTF-8')
     contents = contents.replaceAll("A2A_ID", System.getenv("A2A_ID"))
     contents = contents.replaceAll("A2A_START_DELAY", System.getenv("A2A_START_DELAY"))
@@ -137,7 +124,6 @@ task('replaceAdsExtra') << {
 tasks.whenTaskAdded { task ->
     if (task.name == 'generateReleaseBuildConfig' || task.name == 'generateDebugBuildConfig') {
         task.dependsOn 'replacePackageName'
-        //task.dependsOn 'replaceAddIDs'
-        //task.dependsOn 'replaceAdsExtra'
+        task.dependsOn 'replaceAdsExtra'
     }
 }
