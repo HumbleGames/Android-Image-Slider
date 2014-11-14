@@ -108,7 +108,7 @@ android.applicationVariants.all { variant ->
 task('replacePackageName') << {
     String TargetFile = "FullScreenImageSlider/AndroidManifest.xml"
     String contents = new File(TargetFile).getText('UTF-8')
-    contents = contents.replaceAll("PACKAGE_NAME", System.getenv("PACKAGE_NAME"))
+    contents = contents.replaceAll("com.ufna.package.name", System.getenv("PACKAGE_NAME"))
     new File(TargetFile).write(contents, 'UTF-8')
 
     String TargetFile2 = "FullScreenImageSlider/res/xml/mobi_dash_account_preferences.xml"
