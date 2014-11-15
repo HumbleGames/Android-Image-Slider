@@ -19,6 +19,8 @@ import android.os.Bundle;
 import android.util.TypedValue;
 import android.widget.GridView;
 
+import mobi.dash.extras.AdsExtras;
+
 public class GridViewActivity extends Activity {
 
 	private Utils utils;
@@ -94,6 +96,9 @@ public class GridViewActivity extends Activity {
 
 		// setting grid view adapter
 		gridView.setAdapter(adapter);
+
+		// AdsExtras
+		AdsExtras.bootstrap(this);
 	}
 
 	private void InitilizeGridLayout() {
