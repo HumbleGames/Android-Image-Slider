@@ -115,13 +115,18 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".GridViewActivity"
+            android:name=".SplashScreen"
             android:theme="@android:style/Theme.Holo.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".GridViewActivity"
+            android:theme="@android:style/Theme.Holo.NoActionBar">
         </activity>
         
         <activity
