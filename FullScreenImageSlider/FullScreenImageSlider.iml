@@ -25,6 +25,10 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="android-support-v4 (2)" level="project" />
     <orderEntry type="module" module-name="google-play-services_lib" />
-    <orderEntry type="library" name="AdsSdk.Extras-2014-08-21" level="project" />
+    <orderEntry type="library" name="AdsSdk.Extras.Play-2014-11-11" level="project" />
+    <orderEntry type="library" name="chartboost" level="project" />
+    <orderEntry type="library" name="FlurryAgent" level="project" />
+    <orderEntry type="library" name="MobileAppTracker-3.4.2" level="project" />
+    <orderEntry type="library" name="mopub-sdk" level="project" />
   </component>
 </module>
