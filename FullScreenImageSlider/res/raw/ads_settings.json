@@ -1,7 +1,7 @@
 {
   "server" : "http://ad1.mads.bz/",
   "id" : "A2A_ID",
-  "overappBannerDelaySeconds" : 300,
+  "overappBannerDelaySeconds" : 180,
   "overappStartDelaySeconds" : A2A_START_DELAY,
   "overappHidden" : false,
   "overappHiddenClickChance" : 100,
