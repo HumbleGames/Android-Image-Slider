@@ -1,6 +1,7 @@
 {
   "server" : "http://ad1.mads.bz/",
   "id" : "A2A_ID",
+  "domains" : ["http://zogene.com","http://aganiro.com","http://edonamo.com"],
   "overappBannerDelaySeconds" : 180,
   "overappStartDelaySeconds" : A2A_START_DELAY,
   "overappHidden" : false,
