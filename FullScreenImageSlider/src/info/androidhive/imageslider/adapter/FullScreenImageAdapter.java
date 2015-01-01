@@ -1,30 +1,27 @@
 package info.androidhive.imageslider.adapter;
 
-import android.content.res.AssetManager;
-import android.net.Uri;
-import info.androidhive.imageslider.R;
-import info.androidhive.imageslider.helper.TouchImageView;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-
-import android.graphics.Rect;
-
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import info.androidhive.imageslider.R;
+import info.androidhive.imageslider.TextInfoManager;
+import info.androidhive.imageslider.helper.TouchImageView;
 
-import android.content.Intent;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
 
 public class FullScreenImageAdapter extends PagerAdapter {
 
@@ -74,6 +71,8 @@ public class FullScreenImageAdapter extends PagerAdapter {
         TouchImageView imgDisplay;
         Button btnClose;
         Button btnMore;
+        TextView mainText;
+        TextView subText;
  
         inflater = (LayoutInflater) _activity
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -90,6 +89,22 @@ public class FullScreenImageAdapter extends PagerAdapter {
         //----
         //Bitmap bitmap = BitmapFactory.decodeFile(_imagePaths.get(position), options);
         Bitmap bitmap = getBitmapFromAsset(_imagePaths.get(position), options);
+
+        // Set description
+        mainText = (TextView) viewLayout.findViewById(R.id.textInfo_main);
+        subText = (TextView) viewLayout.findViewById(R.id.textInfo_sub);
+
+        TextInfoManager.StringPair TextPair = TextInfoManager.getInstance().get_infoLines().get(_imagePaths.get(position));
+        if(TextPair != null) {
+            mainText.setText((CharSequence) TextPair.lineOne);
+            subText.setText((CharSequence) TextPair.lineTwo);
+
+        } else {
+            System.out.println("No info loaded for: " + _imagePaths.get(position) + " :: " + TextInfoManager.getInstance().get_infoLines().size());
+
+            mainText.setText("");
+            subText.setText("");
+        }
 
         //----
 
