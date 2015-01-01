@@ -1,11 +1,14 @@
 package info.androidhive.imageslider;
 
+import android.app.Activity;
+import android.content.res.AssetManager;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import info.androidhive.imageslider.helper.StringPair;
 
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,42 +26,28 @@ public class TextInfoManager {
         return _infoLines;
     }
 
-    public class StringPair {
-        public String lineOne = "";
-        public String lineTwo = "";
-
-        StringPair(String lineOne, String lineTwo) {
-            this.lineOne = lineOne;
-            this.lineTwo = lineTwo;
-        }
-    }
-
     /** List of descriptions added to photos */
     private Map<String , StringPair> _infoLines = new HashMap<String , StringPair>();
 
-    private TextInfoManager() {
+    private TextInfoManager() {}
+
+    public void loadAppData(Activity activity) {
         // Configure json mapper
         ObjectMapper mapper = new ObjectMapper();
         mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
 
-        File appDataFile = new File("assets/applist.json");
+        // Load json from assets
+        AssetManager assetManager = activity.getAssets();
+        InputStream istr = null;
 
-        if(appDataFile.exists()) {
-            try {
-                // Read static data from json
-                _infoLines = mapper.readValue(appDataFile, new TypeReference<Map<String, StringPair>>() { } );
+        try {
+            istr = assetManager.open("applist.json");
+            _infoLines = mapper.readValue(istr, new TypeReference<Map<String, StringPair>>() { } );
 
-                System.out.println("Applications list loaded");
-
-            } catch (IOException e) {
-                System.out.println("Applications list read failed");
-                e.printStackTrace();
-            }
-
-        }
-        else {
-            System.out.println("Application info file doesn't exist!");
+        } catch (IOException e) {
+            System.out.println("Applications list read failed");
+            e.printStackTrace();
         }
     }
 }

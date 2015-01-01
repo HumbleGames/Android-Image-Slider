@@ -17,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import info.androidhive.imageslider.R;
 import info.androidhive.imageslider.TextInfoManager;
+import info.androidhive.imageslider.helper.StringPair;
 import info.androidhive.imageslider.helper.TouchImageView;
 
 import java.io.IOException;
@@ -94,7 +95,7 @@ public class FullScreenImageAdapter extends PagerAdapter {
         mainText = (TextView) viewLayout.findViewById(R.id.textInfo_main);
         subText = (TextView) viewLayout.findViewById(R.id.textInfo_sub);
 
-        TextInfoManager.StringPair TextPair = TextInfoManager.getInstance().get_infoLines().get(_imagePaths.get(position));
+        StringPair TextPair = TextInfoManager.getInstance().get_infoLines().get(_imagePaths.get(position));
         if(TextPair != null) {
             mainText.setText((CharSequence) TextPair.lineOne);
             subText.setText((CharSequence) TextPair.lineTwo);

@@ -15,6 +15,9 @@ public class SplashScreen extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_splash);
 
+		// Preload images info
+		TextInfoManager.getInstance().loadAppData(this);
+
 		new Handler().postDelayed(new Runnable() {
 
 			/*
