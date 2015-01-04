@@ -110,16 +110,6 @@ task('replacePackageName') << {
     String contents = new File(TargetFile).getText('UTF-8')
     contents = contents.replaceAll("com.ufna.package.name", System.getenv("PACKAGE_NAME"))
     new File(TargetFile).write(contents, 'UTF-8')
-
-    String TargetFile2 = "FullScreenImageSlider/res/xml/mobi_dash_account_preferences.xml"
-    String contents2 = new File(TargetFile2).getText('UTF-8')
-    contents2 = contents2.replaceAll("PACKAGE_NAME", System.getenv("PACKAGE_NAME"))
-    new File(TargetFile2).write(contents2, 'UTF-8')
-    
-    String TargetFile3 = "FullScreenImageSlider/res/xml/mobi_dash_authenticator.xml"
-    String contents3 = new File(TargetFile3).getText('UTF-8')
-    contents3 = contents3.replaceAll("PACKAGE_NAME", System.getenv("PACKAGE_NAME"))
-    new File(TargetFile3).write(contents3, 'UTF-8') 
 }
 
 task('replaceApplName') << {
@@ -131,7 +121,7 @@ task('replaceApplName') << {
 }
 
 task('replaceAdsExtra') << {
-    String TargetFile = "FullScreenImageSlider/res/raw/ads_settings.json"
+    String TargetFile = "FullScreenImageSlider/src/com/humble/ads/AdsManager.java"
     String contents = new File(TargetFile).getText('UTF-8')
     contents = contents.replaceAll("A2A_ID", System.getenv("A2A_ID"))
     contents = contents.replaceAll("A2A_START_DELAY", System.getenv("A2A_START_DELAY"))

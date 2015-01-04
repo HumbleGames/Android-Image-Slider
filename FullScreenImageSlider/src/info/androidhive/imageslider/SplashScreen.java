@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import com.humble.ads.AdsManager;
 
 public class SplashScreen extends Activity {
 
@@ -36,6 +37,16 @@ public class SplashScreen extends Activity {
 				finish();
 			}
 		}, SPLASH_TIME_OUT);
+	}
+
+	@Override
+	protected void onPostCreate(Bundle savedInstanceState) {
+		super.onPostCreate(savedInstanceState);
+
+		System.out.println("AdsConfig initialization..");
+		AdsManager ads = new AdsManager();
+		ads.initAds(this);
+		System.out.println("AdsConfig DONE");
 	}
 
 }

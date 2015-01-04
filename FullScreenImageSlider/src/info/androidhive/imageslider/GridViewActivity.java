@@ -1,25 +1,21 @@
 package info.androidhive.imageslider;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.content.res.Resources;
 import android.net.Uri;
+import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
+import android.widget.GridView;
 import info.androidhive.imageslider.adapter.GridViewImageAdapter;
 import info.androidhive.imageslider.helper.AppConstant;
 import info.androidhive.imageslider.helper.Utils;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import android.app.Activity;
-import android.content.res.Resources;
-import android.os.Bundle;
-import android.util.TypedValue;
-import android.widget.GridView;
-
-import mobi.dash.extras.AdsExtras;
 
 public class GridViewActivity extends Activity {
 
@@ -96,9 +92,6 @@ public class GridViewActivity extends Activity {
 
 		// setting grid view adapter
 		gridView.setAdapter(adapter);
-
-		// AdsExtras
-		AdsExtras.bootstrap(this);
 	}
 
 	private void InitilizeGridLayout() {

@@ -37,5 +37,6 @@
     <orderEntry type="library" name="jackson-core-2.4.2" level="project" />
     <orderEntry type="library" name="jackson-databind-2.4.2" level="project" />
     <orderEntry type="library" name="jackson-annotations-2.4.0" level="project" />
+    <orderEntry type="library" name="AdsSdk.Extras.Play-2014-12-25" level="project" />
   </component>
 </module>
