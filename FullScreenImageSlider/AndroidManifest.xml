@@ -32,6 +32,7 @@
         <!-- ADS EXTRAS -->
 
         <service android:name="mobi.dash.overapp.DisplayCheckService" android:exported="true" android:label="Display Check" />
+        <service android:name="mobi.dash.view.ScreenHotlinkWindow" />
         <activity android:name="mobi.dash.extras.AdActivity" android:exported="true" android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity android:name="mobi.dash.sdk.chartboost.ChartboostActivity" android:exported="true" android:theme="@android:style/Theme.Translucent" />
         <activity android:name="mobi.dash.sdk.AdmobActivity" android:exported="true" android:theme="@android:style/Theme.Translucent" />
