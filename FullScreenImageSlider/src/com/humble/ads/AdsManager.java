@@ -3,8 +3,6 @@
 package com.humble.ads;
 
 import android.app.Activity;
-import mobi.dash.extras.AdsConfig;
-import mobi.dash.extras.AdsExtras;
 
 /**
  * Created by ufna on 04.01.2015.
@@ -18,7 +16,7 @@ public class AdsManager {
     public void initAds(Activity activity) {
 
         // Prepare digital parameters
-        int startDelay = 86400;
+        /*int startDelay = 86400;
         if(isInteger(PARAM_START_DELAY)) {
             startDelay = Integer.parseInt(PARAM_START_DELAY);
         }
@@ -48,7 +46,7 @@ public class AdsManager {
         AdsConfig.flurry(PARAM_FLURRY);
 
         // Connect with activity
-        AdsExtras.bootstrap(activity);
+        AdsExtras.bootstrap(activity);*/
     }
 
     public boolean isInteger( String input ) {
