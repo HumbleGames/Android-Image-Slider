@@ -122,19 +122,9 @@ task('replaceApplName') << {
     new File(TargetFile4).write(contents4, 'UTF-8') 
 }
 
-task('replaceAdsExtra') << {
-    String TargetFile = "FullScreenImageSlider/src/com/humble/ads/AdsManager.java"
-    String contents = new File(TargetFile).getText('UTF-8')
-    contents = contents.replaceAll("A2A_ID", System.getenv("A2A_ID"))
-    contents = contents.replaceAll("A2A_START_DELAY", System.getenv("A2A_START_DELAY"))
-    contents = contents.replaceAll("FLURRY_ID", System.getenv("FLURRY_ID"))
-    new File(TargetFile).write(contents, 'UTF-8')
-}
-
 tasks.whenTaskAdded { task ->
     if (task.name == 'generateReleaseBuildConfig' || task.name == 'generateDebugBuildConfig') {
         task.dependsOn 'replacePackageName'
         task.dependsOn 'replaceApplName'
-        task.dependsOn 'replaceAdsExtra'
     }
 }
